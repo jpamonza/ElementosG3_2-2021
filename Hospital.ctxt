@@ -1,4 +1,5 @@
 #BlueJ class context
-comment0.params=posibleMedico
-comment0.target=boolean\ ingresar(Personal)
-numComments=1
+comment0.target=Hospital
+comment1.params=posibleMedico
+comment1.target=boolean\ ingresar(Personal)
+numComments=2
