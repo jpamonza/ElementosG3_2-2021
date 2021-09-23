@@ -11,4 +11,15 @@ class NoDescartable extends Producto{
         super(codigo, precioCompra, precioVenta, descuento);
         this.descripcion = descripcion;
     }
+    
+    public double perdida(){
+        double res = 0;
+        double precioVentaReal = precioVenta.getPrecioVentaReal();
+        
+        if(precioVentaReal < precioCompra){
+            res = precioCompra - precioVentaReal;
+        }
+        
+        return res;
+    }
 }

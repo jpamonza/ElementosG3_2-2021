@@ -5,4 +5,7 @@ class Venta{
     private void registrar(Producto p, Fecha hoy){
         ???
     }
+    
+    public double perdida(){
+    }
 }

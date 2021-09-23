@@ -12,4 +12,9 @@ class Descartable extends Producto{
         super(codigo, precioCompra, precioVenta, descuento);
         fechaVencimiento = fec;
     }
+    
+    @Override
+    public double perdida(){
+        return 0;
+    }
 }

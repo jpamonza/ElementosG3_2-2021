@@ -1,9 +1,9 @@
 package Tienda;
 
-class Producto{
-    private int codigo;
-    private double precioCompra;
-    private PrecioVenta precioVenta;
+public abstract class Producto{
+    protected int codigo;
+    protected double precioCompra;
+    protected PrecioVenta precioVenta;
     
     public Producto(
         int codigo,
@@ -15,7 +15,5 @@ class Producto{
         this.precioVenta = new PrecioVenta(precioVenta, descuento);
     }    
     
-    public double perdida(){
-        return 0.0;
-    }
+    public abstract double perdida();
 }
