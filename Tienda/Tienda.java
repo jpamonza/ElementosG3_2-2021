@@ -1,7 +1,7 @@
 package Tienda;
 
 class Tienda{
-    private ArrayList<Diario> ventasDia;
+    private ArrayList<PuntoDeVenta> puntosDeVenta;
     public double perdidaXDia(Fecha fecha){
         double perdida = 0.0;
         for(Diario d: ventasDia){
