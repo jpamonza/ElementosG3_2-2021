@@ -90,6 +90,31 @@ public class ListaSER<T> implements Lista<T>{
         }
         return res;
     }
+    
+    public void invertir(){
+        /*
+         * La unica forma de poder actualizar los datos sin perder la informacion
+         * es hacer una copia de la lista principal
+         * una vez invertidos los enlaces, actualizamos los datos de la lista principal
+         */
+        ListaSER<T> copia = new ListaSER();
+        copia.dato = this.dato;
+        copia.sig = this.sig;
+        ListaSER<T> nuevoPrimero = invertir(new ListaSER<T>(), copia);
+        this.dato = nuevoPrimero.dato;
+        this.sig = nuevoPrimero.sig;
+    }
+    
+    private ListaSER<T> invertir(ListaSER<T> ant, ListaSER<T> act){
+        ListaSER<T> ult;
+        if(act.vacia()){
+            ult = ant;
+        }else{
+            ult = invertir(act, act.sig);
+            act.sig = ant; // invertir enlace
+        }
+        return ult;
+    }
 }
 
 
