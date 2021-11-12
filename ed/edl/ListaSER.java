@@ -76,6 +76,20 @@ public class ListaSER<T> implements Lista<T>{
         
         return clon;
     }
+    
+    public String toString(){
+        String res;
+        if(vacia()){
+            res = "";
+        }else{
+            res = dato.toString();
+            if(!sig.vacia()){
+                res += ", ";
+            }
+            res += sig.toString();
+        }
+        return res;
+    }
 }
 
 
