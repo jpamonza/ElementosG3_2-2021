@@ -59,6 +59,23 @@ public class ListaSER<T> implements Lista<T>{
         }
         return res;
     }
+    
+    public ListaSER<T> clone(){
+        ListaSER<T> clon = new ListaSER();
+        
+        ListaSER<T> obj = clon;
+        
+        ListaSER<T> act = this;
+        while(act.vacia() != true){
+            obj.dato = act.dato;
+            obj.sig = new ListaSER();
+            obj = obj.sig;
+            
+            act = act.sig;
+        }
+        
+        return clon;
+    }
 }
 
 
