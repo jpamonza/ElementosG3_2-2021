@@ -317,6 +317,58 @@ public class ArbolBin<T>{
             finalizo = true;
         return finalizo;
     }
+    
+    public void amplitud(){
+        Cola<ArbolBin<T>> cola = new Cola();
+        
+        cola.encolar(this);
+        ArbolBin<T> act;
+        while(!cola.vacia()){
+            act = cola.decolar();
+            
+            System.out.println(act.raiz);
+            
+            if(act.der != null){
+                cola.encolar(act.der);
+            }
+            if(act.izq != null){
+                cola.encolar(act.izq);
+            }
+        }
+    }
+    
+    public void inorden(){
+        if(!vacio()){
+            //izq
+            izq.inorden();
+            //raiz
+            System.out.println(raiz);
+            //der
+            der.inorden();
+        }
+    }
+    
+    public void preorden(){
+        if(!vacio()){
+            //raiz
+            System.out.println(raiz);
+            //izq
+            izq.preorden();
+            //der
+            der.preorden();
+        }
+    }
+    
+    public void postorden(){
+        if(!vacio()){
+            //izq
+            izq.postorden();
+            //der
+            der.postorden();
+            //raiz
+            System.out.println(raiz);
+        }
+    }
 }
 
 
