@@ -15,14 +15,18 @@ public class ArbolBB<T extends Comparable<T>>{
             izq = new ArbolBB();
             der = new ArbolBB();
         }else{
-            
+            if(dato.compareTo(raiz) < 0){
+                izq.insertar(dato);
+            }else if(dato.compareTo(raiz) > 0){
+                der.insertar(dato);
+            }
         }
     }
-    public T buscar(T dato){
-        T res = null;
+    public boolean buscar(T dato){
+        boolean res = false;
         if(!vacio()){
             if(raiz.equals(dato))
-                res = dato;
+                res = true;
             else{
                 if(dato.compareTo(raiz) > 0){
                     res = der.buscar(dato);

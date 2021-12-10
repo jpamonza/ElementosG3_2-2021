@@ -2,10 +2,10 @@ package ed.ednl;
 import ed.edl.*;
 public class ArbolBin<T>{
     private T raiz;
-    private ArbolBin<T> izq, der;
+    private ArbolBin<T> izq, der, padre;
     public ArbolBin(){
         raiz = null;
-        izq = der = null;
+        izq = der = padre = null;
     }
     public boolean vacio(){
         return raiz == null;
