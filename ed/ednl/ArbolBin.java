@@ -247,75 +247,55 @@ public class ArbolBin<T>{
         }
     }
     
-    public ListaSE<T> frontera(){
-        ListaSE<T> res = new ListaSE();
-        /**Preorden hasta la 1ra hoja*/
-        preordenModificado(res, this);
+    public ListaSER<T> frontera(){
+        ListaSER<T> res = new ListaSER();
         
-        encontrarHojas(res);
+        nodosMasAlaIzquierda(this, res);
         
-        Pila<T> p = preordenInvertidoModificado();
-        while(!p.vacia()){
-            T d = p.pop();
-            res.insertar(d);
-        }
+        obtenerHojas(this, res);
+        
+        nodosMasAlaDerecha(this, res);
+        
         return res;
     }
-    private Pila<T> preordenInvertidoModificado(){
-        Pila<T> res = new Pila();
-        /**RAIZ*/
-        //no me conviene tomarlo
-        if(!der.vacio())
-            preordenInvertidoModificado(res, der);
-        else if(!this.izq.vacio()){
-            preordenInvertidoModificado(res, izq);
+    
+    private void nodosMasAlaIzquierda(ArbolBin<T> a, ListaSER<T> l) {
+        if(!a.esHoja()){
+            l.insertar(a.raiz);
+            
+            if(!a.izq.vacio()){
+                nodosMasAlaIzquierda(a.izq, l);
+            }else{
+                nodosMasAlaIzquierda(a.der, l);
+            }
         }
-        return res;
     }
-    private boolean preordenInvertidoModificado(Pila<T> res, ArbolBin<T> act){
-        boolean finalizo = false;
-        if(!act.esHoja() && !act.vacio()){
-            /**RAIZ*/
-            res.push(act.raiz);
-            /**DER*/
-            if(!act.der.vacio())
-                finalizo = preordenInvertidoModificado(res, act.der);
-            /**IZQ*/
-            if(!act.izq.vacio() && !finalizo)
-                finalizo = preordenInvertidoModificado(res, act.izq);
-        }else
-            finalizo = true;
-        return finalizo;
+    
+    private void obtenerHojas(ArbolBin<T> a, ListaSER<T> l){
+        if(a.esHoja()){
+            l.insertar(a.raiz);
+        }else{
+            if(!a.izq.vacio()){
+                obtenerHojas(a.izq, l);
+            }
+            if(!a.der.vacio()){
+                obtenerHojas(a.der, l);
+            }
+        }
     }
-    private void encontrarHojas(ListaSE<T> res){
-        //como inorden
-        encontrarHojas(res, this);
-    }
-    private void encontrarHojas(ListaSE<T> res, ArbolBin<T> act){
-        /**IZQ*/
-        if(!act.izq.vacio())
-            encontrarHojas(res, act.izq);
-        /**RAIZ*/
-        if(act.esHoja())
-            res.insertar(act.raiz);
-        /**DER*/
-        if(!act.der.vacio())
-            encontrarHojas(res, act.der);
-    }
-    private boolean preordenModificado(ListaSE<T> res, ArbolBin<T> act){
-        boolean finalizo = false;
-        if(!act.esHoja() && !act.vacio()){
-            /**RAIZ*/
-            res.insertar(act.raiz);
-            /**IZQ*/
-            if(!act.izq.vacio())
-                finalizo = preordenModificado(res, act.izq);
-            /**DER*/
-            if(!act.der.vacio() && !finalizo)
-                preordenModificado(res, act.der);
-        }else
-            finalizo = true;
-        return finalizo;
+    
+    private void nodosMasAlaDerecha(ArbolBin<T> a, ListaSER<T> l){
+        if(!a.esHoja()){
+            if(!a.der.vacio()){
+                nodosMasAlaDerecha(a.der, l);
+            }else{
+                nodosMasAlaDerecha(a.izq, l);
+            }
+            
+            if(a != this){
+                l.insertar(a.raiz);
+            }
+        }
     }
     
     public void amplitud(){

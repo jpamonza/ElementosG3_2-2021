@@ -1,61 +1,59 @@
 package ed.edl;
-public class Set<T>{
+
+public class Set<T extends Comparable<T>>{
     private NodoSE<T> ini;
+    
     public Set(){
         ini = null;
     }
-    public boolean vacia(){
+    
+    public boolean vacio(){
         return ini == null;
     }
+    
     public void insertar(T dato){
-        NodoSE<T> nuevo = new NodoSE(dato);
-        if(!vacia()){
+        if(vacio()){
+            ini = new NodoSE(dato);
+        }else{
+            boolean existe = false;
             NodoSE<T> act = ini;
-            boolean duplicado = false;
-            while(!duplicado && act.getSig() != null){
-                if(act.getDato().equals(dato)){
-                    duplicado = true;
-                }else
-                    act = act.getSig();
+            while(
+                !(existe = act.getDato().compareTo(dato) == 0) &&
+                act.getSig() != null
+            ){
+                act = act.getSig();
             }
             
-            if(act.getSig() == null && !duplicado && !act.getDato().equals(dato))
-                act.setSig(nuevo);
-        }else
-            ini = nuevo;
+            if(!existe){
+                act.setSig(new NodoSE(dato));
+            }
+        }
     }
+    
     public T eliminar(T dato){
         T res = null;
-        if(!vacia()){
-            NodoSE<T> ant, act, sig;
-            ant = null;
-            act = ini;
-            sig = act.getSig();
-            
-            while(act != null && !act.getDato().equals(dato)){
+        
+        if(!vacio()){
+            NodoSE<T> ant = null;
+            NodoSE<T> act = ini;
+            while(act != null && res != null){
+                if(act.getDato().compareTo(dato) == 0){
+                    res = dato;
+                    
+                    if(ant != null)
+                        ant.setSig(act.getSig());
+                    else
+                        this.ini = act.getSig();
+                }
+                
                 ant = act;
-                act = sig;
-                if(sig != null)
-                    sig = sig.getSig();
-            }
-            if(act!= null && act.getDato().equals(dato)){
-                ant.setSig(sig);
-                res = act.getDato();
+                act = act.getSig();
             }
         }
-        return res;
-    }
-    public String toString(){
-        String res = "";
-        NodoSE<T> act = ini;
-        while(act != null){
-            res += act.getDato().toString() + "\t";
-            act = act.getSig();
-        }
+        
         return res;
     }
 }
-
 
 
 
